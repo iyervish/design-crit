@@ -97,7 +97,7 @@ export default function Home() {
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="heading-xl mb-6">
-              Design Critique
+              Visual Design Critique
             </h1>
             <p className="text-lg text-text mb-8 max-w-2xl mx-auto leading-relaxed">
               Upload a screenshot or enter a URL to receive a comprehensive design evaluation.

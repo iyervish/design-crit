@@ -6,8 +6,12 @@ import { ArrowUpTrayIcon, LinkIcon, SparklesIcon } from '@heroicons/react/24/out
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+// FEATURE FLAG: Enable URL analysis when you upgrade to Vercel Pro
+// Change this to true to re-enable URL input (requires Vercel Pro for 60s timeout)
+const ENABLE_URL_ANALYSIS = false;
+
 export default function Home() {
-  const [inputType, setInputType] = useState<'url' | 'screenshot'>('url');
+  const [inputType, setInputType] = useState<'url' | 'screenshot'>('screenshot');
   const [url, setUrl] = useState('');
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,7 +104,9 @@ export default function Home() {
               Visual Design Critique
             </h1>
             <p className="text-lg text-text mb-8 max-w-2xl mx-auto leading-relaxed">
-              Upload a screenshot or enter a URL to receive a comprehensive design evaluation.
+              {ENABLE_URL_ANALYSIS
+                ? 'Upload a screenshot or enter a URL to receive a comprehensive design evaluation.'
+                : 'Upload a screenshot to receive a comprehensive design evaluation.'}
             </p>
           </motion.div>
         </div>
@@ -116,36 +122,38 @@ export default function Home() {
             className="card p-8"
           >
             {/* Input Type Toggle */}
-            <div className="flex gap-4 mb-8">
-              <button
-                type="button"
-                onClick={() => setInputType('url')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
-                  inputType === 'url'
-                    ? 'bg-primary text-white shadow-glow-primary'
-                    : 'bg-background-light text-text-muted hover:bg-background-dark'
-                }`}
-              >
-                <LinkIcon className="w-5 h-5" />
-                Website URL
-              </button>
-              <button
-                type="button"
-                onClick={() => setInputType('screenshot')}
-                className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
-                  inputType === 'screenshot'
-                    ? 'bg-primary text-white shadow-glow-primary'
-                    : 'bg-background-light text-text-muted hover:bg-background-dark'
-                }`}
-              >
-                <ArrowUpTrayIcon className="w-5 h-5" />
-                Upload Screenshot
-              </button>
-            </div>
+            {ENABLE_URL_ANALYSIS && (
+              <div className="flex gap-4 mb-8">
+                <button
+                  type="button"
+                  onClick={() => setInputType('url')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
+                    inputType === 'url'
+                      ? 'bg-primary text-white shadow-glow-primary'
+                      : 'bg-background-light text-text-muted hover:bg-background-dark'
+                  }`}
+                >
+                  <LinkIcon className="w-5 h-5" />
+                  Website URL
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInputType('screenshot')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
+                    inputType === 'screenshot'
+                      ? 'bg-primary text-white shadow-glow-primary'
+                      : 'bg-background-light text-text-muted hover:bg-background-dark'
+                  }`}
+                >
+                  <ArrowUpTrayIcon className="w-5 h-5" />
+                  Upload Screenshot
+                </button>
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {inputType === 'url' ? (
+              {ENABLE_URL_ANALYSIS && inputType === 'url' ? (
                 <div>
                   <label htmlFor="url" className="block text-sm font-medium mb-2">
                     Website URL

@@ -109,29 +109,6 @@ Go to [http://localhost:3002](http://localhost:3002)
 
 That's it! You can now analyze any design.
 
----
-
-## For Developers
-
-### Tech Stack
-- Next.js 15 (App Router), React 19, TypeScript
-- Tailwind CSS with custom design system
-- GPT-4o Vision (OpenAI)
-- Playwright for screenshot capture
-- Framer Motion for animations
-
-### Deployment to Vercel (Optional)
-Want to host DesignCrit online for your team?
-
-1. Push your code to GitHub
-2. Sign up for [Vercel](https://vercel.com) (free for personal projects)
-3. Connect your GitHub repository
-4. Add your \`OPENAI_API_KEY\` in Vercel's environment variables
-5. Click Deploy
-
-Vercel will give you a URL like \`your-project.vercel.app\`. You can also add a custom domain in the settings.
-
----
 
 ## How It Works (Behind the Scenes)
 

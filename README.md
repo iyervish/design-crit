@@ -1,6 +1,6 @@
 # DesignCrit
 
-Get instant, expert-level feedback on any website design—powered by AI.
+Get instant, expert-level feedback on any website design.
 
 ## What is DesignCrit?
 

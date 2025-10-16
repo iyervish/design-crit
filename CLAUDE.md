@@ -409,20 +409,42 @@ screenshot: [File object]
 
 ## Deployment (Vercel)
 
+### Serverless Chromium Support
+The app uses **serverless-compatible Chromium** (`@sparticuz/chromium`) for Vercel deployment:
+- `lib/screenshot.ts` automatically detects serverless environment
+- Uses `playwright-core` + `@sparticuz/chromium` in production
+- Falls back to local Playwright for development
+
 ### Environment Setup
-1. Add `OPENAI_API_KEY` to Vercel environment variables
-2. Playwright should work out-of-box on Vercel (no additional config needed)
+1. Add `OPENAI_API_KEY` to Vercel environment variables (all environments)
+2. Serverless Chromium works automatically - no additional config needed
+3. Requires **Vercel Pro** for 60s timeout and 3GB memory (free tier: 10s timeout, 1GB memory)
 
 ### Configuration Files
-- `vercel.json` - Deployment settings
+- `vercel.json` - Function settings (60s timeout, 3GB memory for `/api/analyze`)
 - `next.config.js` - React strict mode enabled
 - `tsconfig.json` - Strict TypeScript mode
+- `DEPLOYMENT.md` - Full deployment guide with troubleshooting
+
+### Vercel Function Configuration
+```json
+{
+  "functions": {
+    "app/api/analyze/route.ts": {
+      "maxDuration": 60,
+      "memory": 3008
+    }
+  }
+}
+```
 
 ### Notes
-- API route has `maxDuration: 60` for long-running analysis
+- API route needs 60s timeout (screenshot + AI analysis can take 15-30s total)
+- 3GB memory recommended for Chromium + large page screenshots
 - Results stored in `/public` directory (accessible via static file serving)
 - Screenshots accessible at `/screenshots/[id].png`
 - Results JSON accessible at `/results/[id].json`
+- See `DEPLOYMENT.md` for detailed deployment instructions
 
 ---
 

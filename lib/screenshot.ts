@@ -1,8 +1,21 @@
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-core';
+import chromiumPkg from '@sparticuz/chromium';
+
+// Detect if we're running on Vercel (serverless)
+const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 
 export async function captureScreenshot(url: string): Promise<Buffer> {
+  // Use serverless chromium on Vercel, local chromium otherwise
+  const executablePath = isServerless
+    ? await chromiumPkg.executablePath()
+    : undefined;
+
   const browser = await chromium.launch({
     headless: true,
+    executablePath,
+    args: isServerless
+      ? chromiumPkg.args
+      : [],
   });
 
   try {

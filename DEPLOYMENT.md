@@ -1,15 +1,16 @@
 # Deploying DesignCrit to Vercel
 
-## What Was Fixed
+## Current Configuration (Free Tier)
 
-Your app wasn't deploying because **Playwright doesn't work on Vercel's serverless environment**. I've updated the code to use a serverless-compatible version.
+Your app is configured to work on **Vercel's Free (Hobby) Tier** with screenshot uploads only.
 
 ### Changes Made:
-1. ✅ Installed `playwright-core` and `@sparticuz/chromium` (serverless-compatible Chromium)
+1. ✅ Installed `playwright-core` and `@sparticuz/chromium` (for future URL analysis)
 2. ✅ Updated `lib/screenshot.ts` to automatically detect serverless environment
-3. ✅ Configured `vercel.json` with proper function settings (60s timeout, 3GB memory)
+3. ✅ Configured `vercel.json` for free tier limits (10s timeout, 1GB memory)
+4. ✅ Disabled URL analysis feature (screenshot upload only)
 
-The app now works both locally AND on Vercel!
+The app now works on Vercel Free Tier!
 
 ---
 
@@ -70,11 +71,12 @@ Want to use your own domain like `designcrit.yourdomain.com`?
 ## Troubleshooting
 
 ### "Function execution timed out"
-This means the screenshot capture or AI analysis took too long. The function is configured for 60s timeout (Vercel's maximum for Pro plans; 10s for free tier).
+This means the AI analysis took too long. The function is configured for 10s timeout (Vercel Free tier limit).
 
 **Solutions:**
-- Upgrade to Vercel Pro ($20/mo) for 60s timeouts
-- Or reduce the screenshot size/quality in `lib/screenshot.ts`
+- This is normal for very large screenshot files or complex images
+- Reduce screenshot file size before uploading (compress or resize images)
+- If timeouts are frequent, consider upgrading to Vercel Pro ($20/mo) for 60s timeouts
 
 ### "Invalid API key" or OpenAI errors
 - Double-check your `OPENAI_API_KEY` in Vercel environment variables
@@ -82,11 +84,12 @@ This means the screenshot capture or AI analysis took too long. The function is 
 - Redeploy after adding/updating environment variables
 
 ### "Memory limit exceeded"
-The function is configured for 3GB memory (requires Vercel Pro). Free tier has 1GB limit.
+The function is configured for 1GB memory (Vercel Free tier limit).
 
-**Solution:**
-- Upgrade to Vercel Pro
-- Or reduce `memory` in `vercel.json` to `1024` (but may fail for large pages)
+**Solutions:**
+- Reduce screenshot file size before uploading
+- Use lower resolution images (under 5MB recommended)
+- If needed, upgrade to Vercel Pro for 3GB memory limit
 
 ### Build failures
 - Check the Vercel build logs for specific errors
@@ -97,20 +100,30 @@ The function is configured for 3GB memory (requires Vercel Pro). Free tier has 1
 
 ## Important Notes
 
-### Vercel Free Tier Limitations
-- **Function timeout**: 10 seconds (vs 60s on Pro)
-- **Function memory**: 1GB (vs 3GB on Pro)
+### Vercel Free Tier Configuration
+Your app is configured to work on the **Free (Hobby) Tier**:
+- **Function timeout**: 10 seconds
+- **Function memory**: 1GB
 - **Bandwidth**: 100GB/month
+- **Features**: Screenshot upload only (URL analysis disabled)
 
-For DesignCrit, you'll likely need **Vercel Pro** because:
-- Screenshot capture takes 5-10 seconds
-- AI analysis takes 5-15 seconds
-- Total can exceed 10 seconds easily
+This works because:
+- Screenshot uploads are fast (< 1 second)
+- AI analysis typically takes 5-8 seconds
+- No browser automation needed (Chromium disabled)
+- Total execution time stays under 10 seconds
 
-### Cost Breakdown
-- **Vercel Pro**: $20/month (per user)
+### Cost Breakdown (Free Tier)
+- **Vercel Hosting**: $0/month
 - **OpenAI API**: ~$0.05-0.10 per analysis
-- **Total**: ~$20/month + usage-based OpenAI costs
+- **Total**: Only pay for OpenAI API usage
+
+### When to Upgrade to Pro
+Consider upgrading to Vercel Pro ($20/month) if:
+- You want URL analysis feature (requires 60s timeout + 3GB memory)
+- You need custom domains
+- You're hitting timeout limits with large screenshots
+- You need faster builds or more bandwidth
 
 ---
 

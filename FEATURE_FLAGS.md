@@ -33,7 +33,21 @@ const ENABLE_URL_ANALYSIS = false;
 const ENABLE_URL_ANALYSIS = true;
 ```
 
-**Step 3: Deploy**
+**Step 3: Update Vercel Configuration**
+Edit `vercel.json` to use Pro tier limits:
+
+```json
+{
+  "functions": {
+    "app/api/analyze/route.ts": {
+      "maxDuration": 60,
+      "memory": 3008
+    }
+  }
+}
+```
+
+**Step 4: Deploy**
 ```bash
 git add .
 git commit -m "feat: Enable URL analysis feature"
@@ -61,9 +75,9 @@ The backend code is **already there** and ready to use - it's just hidden in the
 All URL analysis code remains intact:
 - ✅ `app/api/analyze/route.ts` - Handles both URL and screenshot inputs
 - ✅ `lib/screenshot.ts` - Playwright screenshot capture with serverless Chromium
-- ✅ `vercel.json` - Configured for 60s timeout and 3GB memory
+- ✅ `vercel.json` - Currently configured for free tier (10s timeout, 1GB memory)
 
-**Nothing needs to be rewritten** - just flip the feature flag!
+**To enable URL analysis**: Flip the feature flag AND update `vercel.json` to Pro tier settings (see below)!
 
 ---
 

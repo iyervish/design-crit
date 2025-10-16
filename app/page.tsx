@@ -100,8 +100,7 @@ export default function Home() {
               Design Critique
             </h1>
             <p className="text-lg text-text mb-8 max-w-2xl mx-auto leading-relaxed">
-              Upload a screenshot or enter a URL to receive a comprehensive design evaluation
-              based on professional design principles.
+              Upload a screenshot or enter a URL to receive a comprehensive design evaluation.
             </p>
           </motion.div>
         </div>

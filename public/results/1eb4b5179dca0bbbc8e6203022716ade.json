@@ -1,0 +1,60 @@
+{
+  "overallScore": 8.2,
+  "categories": {
+    "aestheticCohesion": {
+      "score": 9,
+      "rationale": "The design elements are consistent and harmonious, with a cohesive visual style that aligns with modern SaaS aesthetics."
+    },
+    "hierarchyLayout": {
+      "score": 8,
+      "rationale": "The layout is clean and well-structured, utilizing white space effectively. However, the information could be better organized for quicker scanning."
+    },
+    "typography": {
+      "score": 8,
+      "rationale": "The typography is readable and modern, though it lacks a distinctive personality that could further elevate the brand."
+    },
+    "colorContrast": {
+      "score": 8,
+      "rationale": "The color palette is vibrant and engaging, though some text elements could benefit from higher contrast for better accessibility."
+    },
+    "imageryIconography": {
+      "score": 7,
+      "rationale": "The imagery is professional, but reliance on generic icons and the absence of custom illustrations slightly detracts from the uniqueness."
+    },
+    "brandExpression": {
+      "score": 9,
+      "rationale": "The design effectively communicates the brand's modern and professional personality, emphasizing innovation and financial growth."
+    },
+    "systemConsistency": {
+      "score": 8,
+      "rationale": "Design tokens and components are consistently applied, but there is room for more systematic approaches in smaller UI elements."
+    },
+    "visualCraft": {
+      "score": 8,
+      "rationale": "The design is polished with attention to detail, though it could benefit from more micro-interactions to enhance user engagement."
+    },
+    "aiSlopIndicators": {
+      "score": 9,
+      "rationale": "The design avoids common AI-generated patterns, showing originality in its gradient usage and overall presentation."
+    },
+    "emotionalResonance": {
+      "score": 8,
+      "rationale": "The design is vibrant and encourages a feeling of modernity and trust, though it could further enhance emotional engagement with more personalized elements."
+    }
+  },
+  "summary": "The design is a strong representation of a modern SaaS interface, combining vibrant colors and professional typography to convey the brand's innovative spirit. It excels in maintaining aesthetic cohesion and effectively communicates the brand's personality. However, there is room for improvement in the use of custom imagery and enhanced information hierarchy. While the design is mostly free of AI-generated slop, it could benefit from more personalized touches to amplify emotional resonance with users.",
+  "aiSlopDetection": {
+    "score": 9,
+    "indicators": [
+      "generic gradient blur orbs"
+    ]
+  },
+  "topRefinements": [
+    "Increase text contrast in some areas to improve accessibility.",
+    "Incorporate custom illustrations to enhance brand differentiation.",
+    "Improve the hierarchy of information for quicker readability and scanning."
+  ],
+  "timestamp": "2025-10-15T21:44:07.687Z",
+  "sourceType": "screenshot",
+  "sourceValue": "Screenshot 2025-10-15 at 5.43.24 PM.png"
+}

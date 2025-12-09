@@ -15,7 +15,7 @@
     "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.3",
-    "next": "15.1.6",
+    "next": "15.1.9",
     "openai": "^4.104.0",
     "playwright-core": "^1.56.0",
     "react": "^19.0.0",
